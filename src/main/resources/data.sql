@@ -1,3 +1,10 @@
+USE rentaldb;
+
+-- Drop existing tables if they exist
+DROP TABLE IF EXISTS `MESSAGES`;
+DROP TABLE IF EXISTS `RENTALS`;
+DROP TABLE IF EXISTS `USERS`;
+
 CREATE TABLE `USERS` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `email` varchar(255),
