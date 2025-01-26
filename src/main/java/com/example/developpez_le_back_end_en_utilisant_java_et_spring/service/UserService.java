@@ -27,6 +27,20 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User getUserById(Integer id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id " + id));
+    }
+
+    public User getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new RuntimeException("User not found with email " + email);
+        }
+        return user;
+    }
+
+
 
     //Delete by ID
 

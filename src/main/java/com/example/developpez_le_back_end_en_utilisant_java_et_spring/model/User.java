@@ -1,15 +1,21 @@
 package com.example.developpez_le_back_end_en_utilisant_java_et_spring.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "USERS")
-@Data
-public class User {
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -19,6 +25,7 @@ public class User {
 
     private String name;
 
+    @Column(nullable = false)
     private String password;
 
     @Column(name = "created_at")
@@ -33,7 +40,43 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
 
+    //methods from UserDetails interface for authorization
 
+    //returns the user’s roles list
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password; // Return the password field
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
 /*
 CREATE TABLE `USERS` (
