@@ -7,6 +7,7 @@ import com.example.developpez_le_back_end_en_utilisant_java_et_spring.model.User
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.repository.UserRepository;
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.security.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -63,6 +64,7 @@ public class AuthController {
     }
 
     @GetMapping("/me")
+    @SecurityRequirement(name = "bearerAuth")  // 🔹 Requires JWT authentication
     public UserDto getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
