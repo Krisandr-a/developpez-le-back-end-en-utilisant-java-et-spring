@@ -15,8 +15,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    //Get by ID
-
     //Get all
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
@@ -33,16 +31,9 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new RuntimeException("User not found with email " + email);
-        }
-        return user;
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email " + email));
     }
 
 
-
-    //Delete by ID
-
-    //Update
 }

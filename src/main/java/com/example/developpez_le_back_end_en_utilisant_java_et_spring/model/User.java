@@ -1,5 +1,6 @@
 package com.example.developpez_le_back_end_en_utilisant_java_et_spring.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

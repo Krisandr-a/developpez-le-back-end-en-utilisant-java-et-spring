@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 import java.util.Collections;
+import java.util.Optional;
+
 @Service
 public class CustomUserDetailsService  implements UserDetailsService {
     @Autowired
@@ -14,14 +16,14 @@ public class CustomUserDetailsService  implements UserDetailsService {
     @Override
     //Users identified by email address (username)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("User Not Found with username: " + email);
-        }
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + email));
+
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                Collections.emptyList()
+                Collections.emptyList() // basic authentication without authorization checks
         );
     }
+
 }
