@@ -34,15 +34,15 @@ public class UserController {
         return userService.getAllUsers();
     } */
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Integer id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
-    @GetMapping("/all")
+    /* @GetMapping("/all")
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
-    }
+    } */
 
     // Test adding a new user
     /* @PostMapping("/users")
