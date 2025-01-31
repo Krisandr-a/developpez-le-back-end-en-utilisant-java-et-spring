@@ -1,8 +1,10 @@
 package com.example.developpez_le_back_end_en_utilisant_java_et_spring.controller;
 
+import com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto.UserDto;
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.model.User;
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     // test success via CLI
-    @GetMapping("/id/{id}")
+    /* @GetMapping("/id/{id}")
     public User getUserById(@PathVariable Integer id) {
         return userService.getUserById(id);
     }
@@ -30,6 +32,16 @@ public class UserController {
     @GetMapping("/all")
     public Iterable<User> getAllUsers() {
         return userService.getAllUsers();
+    } */
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Integer id) {
+        return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     // Test adding a new user

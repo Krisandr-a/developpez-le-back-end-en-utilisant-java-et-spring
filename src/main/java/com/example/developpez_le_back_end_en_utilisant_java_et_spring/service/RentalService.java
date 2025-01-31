@@ -1,8 +1,8 @@
 package com.example.developpez_le_back_end_en_utilisant_java_et_spring.service;
 
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto.RentalDto;
-import com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto.AddRentalRequestDto;
-import com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto.UpdateRentalRequestDto;
+import com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto.AddRentalDto;
+import com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto.UpdateRentalDto;
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.model.Rental;
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.model.User;
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.repository.RentalRepository;
@@ -55,7 +55,7 @@ public class RentalService {
         return rentals.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    public RentalDto addRental(AddRentalRequestDto rentalRequest) {
+    public RentalDto addRental(AddRentalDto rentalRequest) {
         User owner = userRepository.findById(rentalRequest.ownerId())
                 .orElseThrow(() -> new RuntimeException("Owner not found"));
 
@@ -73,7 +73,7 @@ public class RentalService {
         return convertToDto(savedRental);
     }
 
-    public RentalDto updateRental(Integer id, UpdateRentalRequestDto rentalUpdateDto) {
+    public RentalDto updateRental(Integer id, UpdateRentalDto rentalUpdateDto) {
         Rental rental = rentalRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Rental not found"));
 

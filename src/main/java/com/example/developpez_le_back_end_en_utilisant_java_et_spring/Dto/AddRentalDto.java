@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 
 @Schema(description = "DTO for creating a new rental")
-public record AddRentalRequestDto(
+public record AddRentalDto(
         @Schema(description = "Name of the rental", example = "Test House 1")
         String name,
 
