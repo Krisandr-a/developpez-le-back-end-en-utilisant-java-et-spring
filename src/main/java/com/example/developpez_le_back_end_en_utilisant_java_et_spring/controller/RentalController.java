@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rentals")
-@Tag(name = "Rentals", description = "Endpoints for managing rental properties")
+@Tag(name = "Locations")
 @SecurityRequirement(name = "bearerAuth")
 public class RentalController {
 
@@ -22,25 +22,25 @@ public class RentalController {
     private RentalService rentalService;
 
     @GetMapping
-    @Operation(summary = "Get all rentals", description = "Fetches a list of all rental properties")
+    @Operation(summary = "Récupérer une liste de toutes les locations")
     public List<RentalDto> getAllRentals() {
         return rentalService.getAllRentals();
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a rental by ID", description = "Fetches rental details by ID")
+    @Operation(summary = "Recherche d'une location par son identifiant")
     public RentalDto getRentalById(@PathVariable Integer id) {
         return rentalService.getRentalById(id);
     }
 
     @PostMapping
-    @Operation(summary = "Create a new rental", description = "Adds a new rental property")
+    @Operation(summary = "Ajouter une nouvelle location")
     public RentalDto createRental(@RequestBody AddRentalDto rentalRequest) {
         return rentalService.addRental(rentalRequest);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update a rental", description = "Updates an existing rental by ID")
+    @Operation(summary = "Mettre à jour une location via son identifiant")
     public RentalDto updateRental(@PathVariable Integer id, @RequestBody UpdateRentalDto rentalUpdateDto) {
         return rentalService.updateRental(id, rentalUpdateDto);
     }

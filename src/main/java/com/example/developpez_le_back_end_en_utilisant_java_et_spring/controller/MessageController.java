@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/messages")
-@Tag(name = "Messages", description = "Endpoint pour ajouter des messages")
+@Tag(name = "Messages")
 @SecurityRequirement(name = "bearerAuth")
 public class MessageController {
 
@@ -21,10 +21,10 @@ public class MessageController {
     private MessageService messageService;
 
     @PostMapping
-    @Operation(summary = "Create a new message", description = "Sends a message for a rental")
+    @Operation(summary = "Ajouter un nouveau message")
     public ResponseEntity<Map<String, String>> createMessage(@RequestBody AddMessageDto addMessageDto) {
         messageService.addMessage(addMessageDto);
-        return ResponseEntity.ok(Map.of("message", "Message send with success"));
+        return ResponseEntity.ok(Map.of("message", "Message sent with success"));
     }
 }
 

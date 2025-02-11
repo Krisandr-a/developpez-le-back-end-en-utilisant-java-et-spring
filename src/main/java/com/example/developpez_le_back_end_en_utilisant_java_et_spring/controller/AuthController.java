@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "S'inscrire et se connecter", description = "Endpoints pour l'inscription, la connexion et l'affichage des données relatives à l'utilisateur actuellement connecté.")
+@Tag(name = "S'inscrire et se connecter")
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -33,6 +33,7 @@ public class AuthController {
     JwtUtil jwtUtils;
 
     @PostMapping("/login")
+    @Operation(summary = "Se connecter")
     public String authenticateUser(@RequestBody UserLoginDto userLoginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -45,6 +46,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "S'inscrire")
     public String registerUser(@RequestBody UserRegistrationDto userRegistrationDto) {
         if (userRepository.existsByEmail(userRegistrationDto.email())) {
             return "Error: Username is already taken!";
@@ -66,7 +68,8 @@ public class AuthController {
     }
 
     @GetMapping("/me")
-    @SecurityRequirement(name = "bearerAuth")  // 🔹 Requires JWT authentication
+    @SecurityRequirement(name = "bearerAuth")
+    @Operation(summary = "Récupérer les informations sur l'utilisateur actuel")// 🔹 Requires JWT authentication
     public UserDto getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

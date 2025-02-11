@@ -28,7 +28,11 @@ public class OpenApiConfiguration {
         Info information = new Info()
                 .title("API ChâTop")
                 .version("1.0")
-                .description("Cette API expose des endpoints pour la gestion des locations, des utilisateurs et des messages.")
+                .description("Cette API expose des endpoints pour la gestion des locations, des utilisateurs et des messages.<br><br>"
+                    + "Pour tester l'API, il faut s'inscrire et se connecter via les endpoints dédiés dans la section « S'inscrire et se connecter ». "
+                    + "Une fois connecté, vous recevrez un jeton JWT dans la réponse. "
+                    + "Copiez le jeton, cliquez sur le bouton « Authorize » en haut de la page "
+                    + "et collez le jeton pour avoir accès aux autres endpoints.")
                 .contact(myContact);
 
         // For JWT Authentication
