@@ -11,7 +11,6 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
-// change parserbuilder to just parser?
 
 @Slf4j
 @Component
@@ -20,57 +19,28 @@ public class JwtUtil {
     private String jwtSecret;
     @Value("${jwt.expiration}")
     private int jwtExpirationMs;
+
     private SecretKey key;
-    // Initializes the key after the class is instantiated and the jwtSecret is injected,
-    // preventing the repeated creation of the key and enhancing performance
+
     @PostConstruct
     public void init() {
         this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
         log.debug("JwtUtil initialized with secret: {}", jwtSecret);
     }
-    // Generate JWT token with logging for each step
-    // this method is never being initialized?
+
     public String generateToken(String username) {
-        log.debug("Starting token generation for username: {}", username);
-
-        // Set the subject (username)
-        log.debug("Setting subject (username): {}", username);
-
-        // Get the current time and log it
         Date issuedAt = new Date();
-        log.debug("Issued at: {}", issuedAt);
 
-        // Calculate the expiration time and log it
         Date expiration = new Date(issuedAt.getTime() + jwtExpirationMs);
-        log.debug("Expiration time: {}", expiration);
 
-        // Sign the token and log the signature algorithm used
-        log.debug("Signing with HS256 algorithm");
-
-        // Generate the token
-        String token = Jwts.builder()
+        return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(issuedAt)
                 .setExpiration(expiration)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
-
-        log.debug("Token generated successfully: {}", token);
-
-        return token;
     }
 
-    // Generate JWT token
-    // original method
-    /*public String generateToken(String username) {
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
-    } */
-    // Get username from JWT token
     public String getUsernameFromToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key).build()
@@ -78,7 +48,7 @@ public class JwtUtil {
                 .getBody()
                 .getSubject();
     }
-    // Validate JWT token
+
     public boolean validateJwtToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
