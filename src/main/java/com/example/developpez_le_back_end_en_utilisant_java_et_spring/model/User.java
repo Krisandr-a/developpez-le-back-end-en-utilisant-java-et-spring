@@ -1,6 +1,5 @@
 package com.example.developpez_le_back_end_en_utilisant_java_et_spring.model;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -56,40 +55,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password; // Return the password field
+        return password;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
-/*
-CREATE TABLE `USERS` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `email` varchar(255),
-  `name` varchar(255),
-  `password` varchar(255),
-  `created_at` timestamp,
-  `updated_at` timestamp
-);
-
-CREATE UNIQUE INDEX `USERS_index` ON `USERS` (`email`);
-
-
- */

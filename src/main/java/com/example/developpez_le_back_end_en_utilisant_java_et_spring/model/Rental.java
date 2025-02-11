@@ -43,20 +43,3 @@ public class Rental {
     private List<Message> messages;
 }
 
-/*
-CREATE TABLE `RENTALS` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255),
-  `surface` numeric,
-  `price` numeric,
-  `picture` varchar(255),
-  `description` varchar(2000),
-  `owner_id` integer NOT NULL,
-  `created_at` timestamp,
-  `updated_at` timestamp
-);
-
-ALTER TABLE `RENTALS` ADD FOREIGN KEY (`owner_id`) REFERENCES `USERS` (`id`);
-
-
- */

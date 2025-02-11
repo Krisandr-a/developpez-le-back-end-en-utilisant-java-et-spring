@@ -30,19 +30,3 @@ public class Message {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }
-
-/*
-CREATE TABLE `MESSAGES` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `rental_id` integer,
-  `user_id` integer,
-  `message` varchar(2000),
-  `created_at` timestamp,
-  `updated_at` timestamp
-);
-
-ALTER TABLE `MESSAGES` ADD FOREIGN KEY (`user_id`) REFERENCES `USERS` (`id`);
-
-ALTER TABLE `MESSAGES` ADD FOREIGN KEY (`rental_id`) REFERENCES `RENTALS` (`id`);
-
- */
