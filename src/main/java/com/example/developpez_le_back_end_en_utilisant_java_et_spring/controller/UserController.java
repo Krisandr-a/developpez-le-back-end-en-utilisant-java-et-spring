@@ -1,15 +1,12 @@
 package com.example.developpez_le_back_end_en_utilisant_java_et_spring.controller;
 
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto.UserDto;
-import com.example.developpez_le_back_end_en_utilisant_java_et_spring.model.User;
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")

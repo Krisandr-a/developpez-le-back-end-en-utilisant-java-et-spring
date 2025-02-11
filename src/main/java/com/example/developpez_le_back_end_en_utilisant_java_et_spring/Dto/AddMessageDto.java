@@ -7,7 +7,7 @@ public record AddMessageDto(
         @Schema(description = "Message content", example = "mon message")
         String message,
 
-        @Schema(description = "ID of the user sending the message", example = "1")
+        @Schema(description = "ID of the user associated with the message", example = "1")
         Integer user_id,
 
         @Schema(description = "ID of the rental associated with the message", example = "1")

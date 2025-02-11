@@ -2,6 +2,7 @@ package com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "DTO for registering a new user")
 public record UserRegistrationDto(
         @Schema(description = "User's email address", example = "user@example.com")
         String email,

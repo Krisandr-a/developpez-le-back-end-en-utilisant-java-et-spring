@@ -61,7 +61,7 @@ public class AuthController {
                 null, // id is auto-generated
                 userRegistrationDto.email(), // username is email
                 userRegistrationDto.name(),
-                encoder.encode(userRegistrationDto.password()), // encode the raw password
+                encoder.encode(userRegistrationDto.password()),
                 LocalDateTime.now(), // createdAt
                 LocalDateTime.now(), // updatedAt
                 null, // rentals (initialize as null or empty list if needed)
@@ -85,7 +85,6 @@ public class AuthController {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // Convert `User` to `UserDTO`
         return new UserDto(user.getId(), user.getName(), user.getEmail(), user.getCreatedAt(), user.getUpdatedAt());
     }
 }
