@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -34,7 +36,7 @@ public class AuthController {
 
     @PostMapping("/login")
     @Operation(summary = "Se connecter")
-    public String authenticateUser(@RequestBody UserLoginDto userLoginDto) {
+    public ResponseEntity<Map<String, String>> authenticateUser(@RequestBody UserLoginDto userLoginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         userLoginDto.email(),
@@ -42,7 +44,9 @@ public class AuthController {
                 )
         );
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return jwtUtils.generateToken(userDetails.getUsername());
+        String token = jwtUtils.generateToken(userDetails.getUsername());
+
+        return ResponseEntity.ok(Map.of("token", token));
     }
 
     @PostMapping("/register")
