@@ -45,7 +45,9 @@ public class RentalController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Mettre à jour une location via son identifiant")
-    public RentalDto updateRental(@PathVariable Integer id, @RequestBody UpdateRentalDto rentalUpdateDto) {
-        return rentalService.updateRental(id, rentalUpdateDto);
+    public ResponseEntity<Map<String, String>> updateRental(@PathVariable Integer id, @RequestBody UpdateRentalDto rentalUpdateDto) {
+        rentalService.updateRental(id, rentalUpdateDto); // Perform the update
+        return ResponseEntity.ok(Map.of("message", "Rental updated!")); // Return custom message
     }
+
 }
