@@ -8,11 +8,11 @@
 		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.test_mysql</groupId>
-	<artifactId>mysql</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>developpez-le-back-end-en-utilisant-java-et-spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mysql</name>
-	<description>Demo project for Spring Boot</description>
+	<name>developpez-le-back-end-en-utilisant-java-et-spring</name>
+	<description>Back-end for use with the previously developed Angular front-end</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -77,21 +77,6 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-api</artifactId>
-			<version>0.12.6</version>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-impl</artifactId>
-			<version>0.12.6</version>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId>
-			<version>0.12.6</version>
-		</dependency> -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/messages")
-@Tag(name = "Messages", description = "Endpoints for managing messages")
+@Tag(name = "Messages", description = "Endpoint pour ajouter des messages")
 @SecurityRequirement(name = "bearerAuth")
 public class MessageController {
 

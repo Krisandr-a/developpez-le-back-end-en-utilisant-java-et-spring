@@ -26,9 +26,9 @@ public class OpenApiConfiguration {
         myContact.setEmail("fake.email@gmail.com");
 
         Info information = new Info()
-                .title("Test title")
+                .title("API ChâTop")
                 .version("1.0")
-                .description("This API exposes endpoints.")
+                .description("Cette API expose des endpoints pour la gestion des locations, des utilisateurs et des messages.")
                 .contact(myContact);
 
         // For JWT Authentication

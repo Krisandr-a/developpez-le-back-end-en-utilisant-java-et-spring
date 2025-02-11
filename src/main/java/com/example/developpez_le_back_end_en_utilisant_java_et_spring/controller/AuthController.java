@@ -8,6 +8,7 @@ import com.example.developpez_le_back_end_en_utilisant_java_et_spring.repository
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.security.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "S'inscrire et se connecter", description = "Endpoints pour l'inscription, la connexion et l'affichage des données relatives à l'utilisateur actuellement connecté.")
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
