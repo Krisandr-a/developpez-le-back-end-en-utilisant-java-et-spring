@@ -25,8 +25,9 @@ public class RentalController {
 
     @GetMapping
     @Operation(summary = "Récupérer une liste de toutes les locations")
-    public List<RentalDto> getAllRentals() {
-        return rentalService.getAllRentals();
+    public Map<String, List<RentalDto>> getAllRentals() {
+        List<RentalDto> rentals = rentalService.getAllRentals();
+        return Map.of("rentals", rentals);
     }
 
     @GetMapping("/{id}")
