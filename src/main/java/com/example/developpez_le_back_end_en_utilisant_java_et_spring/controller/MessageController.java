@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/messages")
+@RequestMapping("/api/messages")
 @Tag(name = "Messages")
 @SecurityRequirement(name = "bearerAuth")
 public class MessageController {

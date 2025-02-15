@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/rentals")
+@RequestMapping("/api/rentals")
 @Tag(name = "Locations")
 @SecurityRequirement(name = "bearerAuth")
 public class RentalController {
