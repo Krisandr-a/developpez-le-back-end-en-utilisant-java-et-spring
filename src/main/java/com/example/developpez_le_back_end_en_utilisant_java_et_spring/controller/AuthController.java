@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @Tag(name = "S'inscrire et se connecter")
 public class AuthController {
     @Autowired
