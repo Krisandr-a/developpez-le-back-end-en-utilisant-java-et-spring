@@ -1,6 +1,8 @@
 package com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -29,9 +31,13 @@ public record RentalDto(
         Integer ownerId,
 
         @Schema(description = "Timestamp when the rental was created", example = "2012-12-02T00:00:00")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        @JsonProperty("created_at")
         LocalDateTime createdAt,
 
         @Schema(description = "Timestamp when the rental was last updated", example = "2014-12-02T00:00:00")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        @JsonProperty("updated_at")
         LocalDateTime updatedAt
 ) {}
 
