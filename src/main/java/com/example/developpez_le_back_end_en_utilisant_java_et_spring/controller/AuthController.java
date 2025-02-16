@@ -6,6 +6,7 @@ import com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto.UserRe
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.model.User;
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.repository.UserRepository;
 import com.example.developpez_le_back_end_en_utilisant_java_et_spring.security.JwtUtil;
+import com.example.developpez_le_back_end_en_utilisant_java_et_spring.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +33,9 @@ public class AuthController {
     PasswordEncoder encoder;
     @Autowired
     JwtUtil jwtUtils;
+    @Autowired
+    AuthService authService;
+
 
     @PostMapping("/login")
     @Operation(summary = "Se connecter")
@@ -73,18 +76,9 @@ public class AuthController {
 
     @GetMapping("/me")
     @SecurityRequirement(name = "bearerAuth")
-    @Operation(summary = "Récupérer les informations sur l'utilisateur actuel")// 🔹 Requires JWT authentication
+    @Operation(summary = "Récupérer les informations sur l'utilisateur actuel")
     public UserDto getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal())) {
-            throw new RuntimeException("User not authenticated");
-        }
-
-        String email = authentication.getName();
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
+        User user = authService.getAuthenticatedUser();
         return new UserDto(user.getId(), user.getName(), user.getEmail(), user.getCreatedAt(), user.getUpdatedAt());
     }
 }

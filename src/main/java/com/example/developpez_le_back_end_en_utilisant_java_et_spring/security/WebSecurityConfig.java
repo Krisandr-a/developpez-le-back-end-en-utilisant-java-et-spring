@@ -4,6 +4,7 @@ import com.example.developpez_le_back_end_en_utilisant_java_et_spring.service.Cu
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
 @Configuration
 public class WebSecurityConfig {
     @Autowired
@@ -37,7 +40,14 @@ public class WebSecurityConfig {
         // Updated configuration for Spring Security 6.x
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.disable())
+                .cors(cors -> cors.configurationSource(request -> {
+                    CorsConfiguration corsConfig = new CorsConfiguration();
+                    corsConfig.applyPermitDefaultValues(); // Allow default CORS settings
+                    corsConfig.addAllowedOrigin("http://localhost:4200"); // Add your frontend domain here
+                    corsConfig.addAllowedMethod("*"); // Allow all HTTP methods
+                    corsConfig.addAllowedHeader("*"); // Allow all headers
+                    return corsConfig;
+                }))
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.authenticationEntryPoint(unauthorizedHandler)
                 )
@@ -46,7 +56,8 @@ public class WebSecurityConfig {
                 )
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/auth/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll() // Use 'requestMatchers' instead of 'antMatchers'
+                                .requestMatchers("/api/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/images/**").permitAll() // Use 'requestMatchers' instead of 'antMatchers'
+                                .requestMatchers(HttpMethod.POST, "/api/rentals").authenticated()
                                 .anyRequest().authenticated()
                 );
         // Add the JWT Token filter before the UsernamePasswordAuthenticationFilter

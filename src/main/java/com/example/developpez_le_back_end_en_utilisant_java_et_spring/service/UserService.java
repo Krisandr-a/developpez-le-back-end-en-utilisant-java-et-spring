@@ -39,20 +39,11 @@ public class UserService {
     }
 
 
-    //Get all
-    /*public Iterable<User> getAllUsers() {
-        return userRepository.findAll();
-    }*/
-
     //Create user
     public User addUser(User user) {
         return userRepository.save(user);
     }
 
-    /*public User getUserById(Integer id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id " + id));
-    } */
 
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)

@@ -1,6 +1,7 @@
 package com.example.developpez_le_back_end_en_utilisant_java_et_spring.Dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -15,8 +16,8 @@ public record AddRentalDto(
         @Schema(description = "Rental price per month", example = "300")
         BigDecimal price,
 
-        @Schema(description = "URL of the property picture", example = "https://example.com/image.jpg")
-        String picture,
+        @Schema(description = "Image of the rental")
+        MultipartFile picture,
 
         @Schema(description = "Detailed description of the rental", example = "A beautiful house with great amenities.")
         String description,

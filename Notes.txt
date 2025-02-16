@@ -1,3 +1,35 @@
+package com.example.developpez_le_back_end_en_utilisant_java_et_spring.configuration;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:4200") // Allow your Angular app
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(true) // Test: Allow credentials if needed
+                .exposedHeaders("Content-Disposition", "Content-Type"); // Test: Expose headers if necessary for images
+
+        // Test 1: Allow images to be accessed: retrieved all except for the new
+        // on posted. Maybe need more?
+        registry.addMapping("/images/**")
+                .allowedOrigins("http://localhost:4200") // Same allowed origin as above
+                .allowedMethods("GET") // Allow GET method for image requests
+                .allowedHeaders("*") // Allow all headers
+                .allowCredentials(true) // Test: Allow credentials (cookies, etc.) if needed
+                .exposedHeaders("Content-Type", "Content-Disposition"); // Test: Expose content-type headers for image files
+                //.allowedHeaders("Content-Type", "Accept", "*"); // Test for image: Allow Content-Type and Accept headers
+                //.allowedHeaders("Authorization", "Content-Type", "*"); // Test 2 for image: Allow specific headers for images
+    }
+}
+
+
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
