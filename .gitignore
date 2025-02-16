@@ -1,4 +1,5 @@
 Notes.txt
+/src/main/resources/static/images/*
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
